@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CRITICAL FOR NETLIFY & GOOGLE SITES: Allows Cloud Female Hindi Audio Stream & Real Photos without 403 block -->
+    <meta name="referrer" content="no-referrer">
+    <title>GYANU AI By Rishi Sir Game Zone</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            font-family: 'Baloo 2', cursive, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        input {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
+
+        /* =====================================================================
+           TRUE 3D FLOATING & SHATTERING CUBE ENGINE (FOR NURSERY KIDS)
+           ===================================================================== */
+        .scene-3d-stage {
+            perspective: 1100px;
+            width: 210px;
+            height: 210px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes floatAndTurnCube {
+            0%, 100% {
+                transform: translateY(0px) rotateX(-14deg) rotateY(-18deg) rotateZ(1deg);
+            }
+            50% {
+                transform: translateY(-12px) rotateX(-6deg) rotateY(22deg) rotateZ(-2deg);
+            }
+        }
+
+        .cube-3d-wrapper {
+            width: 176px;
+            height: 176px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: floatAndTurnCube 5s ease-in-out infinite;
+            transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 176px;
+            height: 176px;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid rgba(255, 255, 255, 0.85);
+            box-shadow: inset 0 6px 16px rgba(255, 255, 255, 0.45), 0 12px 26px rgba(0, 0, 0, 0.22);
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+            backface-visibility: visible;
+        }
+
+        .cube-face::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 14px;
+            right: 14px;
+            height: 28%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0));
+            border-radius: 18px 18px 50% 50%;
+            pointer-events: none;
+        }
+
+        .face-front  { transform: rotateY(0deg) translateZ(88px); }
+        .face-back   { transform: rotateY(180deg) translateZ(88px); }
+        .face-right  { transform: rotateY(90deg) translateZ(88px); }
+        .face-left   { transform: rotateY(-90deg) translateZ(88px); }
+        .face-top    { transform: rotateX(90deg) translateZ(88px); }
+        .face-bottom { transform: rotateX(-90deg) translateZ(88px); }
+
+        .cube-3d-wrapper.cube-broken {
+            animation-play-state: paused;
+            pointer-events: none;
+        }
+        .cube-3d-wrapper.cube-broken .face-front  { transform: rotateY(0deg) translateZ(240px) rotateZ(25deg) scale(0.2); opacity: 0; }
+        .cube-3d-wrapper.cube-broken .face-back   { transform: rotateY(180deg) translateZ(240px) rotateZ(-25deg) scale(0.2); opacity: 0; }
+        .cube-3d-wrapper.cube-broken .face-right  { transform: rotateY(90deg) translateZ(240px) translateY(-60px) rotateZ(35deg) scale(0.2); opacity: 0; }
+        .cube-3d-wrapper.cube-broken .face-left   { transform: rotateY(-90deg) translateZ(240px) translateY(60px) rotateZ(-35deg) scale(0.2); opacity: 0; }
+        .cube-3d-wrapper.cube-broken .face-top    { transform: rotateX(90deg) translateZ(240px) rotateY(30deg) scale(0.2); opacity: 0; }
+        .cube-3d-wrapper.cube-broken .face-bottom { transform: rotateX(-90deg) translateZ(240px) rotateY(-30deg) scale(0.2); opacity: 0; }
+
+        @keyframes float3DObject {
+            0%, 100% {
+                transform: translateY(0px) rotateY(-8deg) rotateZ(-1deg) scale(1);
+            }
+            50% {
+                transform: translateY(-8px) rotateY(8deg) rotateZ(1deg) scale(1.03);
+            }
+        }
+
+        .object-3d-stage {
+            position: absolute;
+            inset: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.15) rotateY(-90deg);
+            pointer-events: none;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.45s ease;
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        .object-3d-stage.object-visible {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+            pointer-events: auto;
+        }
+
+        .object-3d-card {
+            animation: float3DObject 3.6s ease-in-out infinite;
+            background: radial-gradient(circle at 30% 25%, #ffffff 0%, #fef9c3 65%, #fde047 100%);
+            border-top: 5px solid #ffffff;
+            border-left: 5px solid #fef08a;
+            border-right: 5px solid #eab308;
+            border-bottom: 12px solid #ca8a04;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.28), inset 0 4px 12px rgba(255, 255, 255, 0.9);
+            border-radius: 32px;
+            width: 244px;
+            min-height: 244px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Real Photo Frame Styling */
+        .real-photo-frame {
+            width: 128px;
+            height: 128px;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 3px 0;
+        }
+        .real-photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .quiz-photo-frame {
+            width: 82px;
+            height: 82px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 3px solid #f3e8ff;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .emoji-3d-bounce {
+            filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.22));
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes shadowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.28; }
+            50% { transform: scale(0.75); opacity: 0.14; }
+        }
+        .stage-floor-shadow {
+            width: 140px;
+            height: 18px;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 75%);
+            border-radius: 50%;
+            animation: shadowPulse 5s ease-in-out infinite;
+            margin-top: 6px;
+        }
+
+        #char-strip::-webkit-scrollbar {
+            height: 0px;
+        }
+
+        /* =====================================================================
+           BALLOON GAME STAGE & ANIMATIONS
+           ===================================================================== */
+        #balloon-sky {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .balloon-wrapper {
+            position: absolute;
+            z-index: 15;
+            cursor: pointer;
+            will-change: bottom, left;
+        }
+        .balloon-body {
+            width: 74px;
+            height: 90px;
+            border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset -6px -6px 14px rgba(0,0,0,0.22), 0 8px 16px rgba(0,0,0,0.18);
+            border: 2.5px solid rgba(255,255,255,0.75);
+            transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+        }
+        .balloon-body::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            width: 11px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.45);
+            transform: rotate(25deg);
+        }
+        .pop-effect {
+            transform: scale(1.8) !important;
+            opacity: 0 !important;
+        }
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-9px) rotate(-6deg); }
+            75% { transform: translateX(9px) rotate(6deg); }
+        }
+        .wrong-shake {
+            animation: wrongShake 0.35s ease-in-out;
+        }
+
+        @keyframes pulseTargetBox {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .target-badge-pulse {
+            animation: pulseTargetBox 1.8s infinite ease-in-out;
+        }
+
+        /* Floating +1 Star Fly Animation */
+        @keyframes starFlyUp {
+            0% { transform: translateY(0) scale(0.6); opacity: 1; }
+            60% { transform: translateY(-45px) scale(1.3); opacity: 1; }
+            100% { transform: translateY(-75px) scale(0.9); opacity: 0; }
+        }
+        .floating-star-pop {
+            position: fixed;
+            z-index: 90;
+            pointer-events: none;
+            animation: starFlyUp 0.95s ease-out forwards;
+        }
+
+        /* Responsive Giant Character on Slate */
+        #trace-guide-text {
+            font-size: clamp(160px, 48vw, 260px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-amber-100 via-pink-100 to-purple-200 flex flex-col justify-between select-none">
+
+    <!-- ================= 0. WELCOME & STUDENT NAME ENTRY MODAL ================= -->
+    <div id="audio-start-overlay" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-4 text-center">
+        <div class="bg-white rounded-3xl p-5 shadow-2xl max-w-xs w-full max-h-[92vh] overflow-y-auto flex flex-col items-center border-4 border-pink-400">
+            <span class="text-5xl mb-1 animate-bounce">🏫</span>
+            <h2 class="text-xl font-black text-pink-600 leading-tight font-['Fredoka_One']">GYANU AI By Rishi Sir <br><span class="text-purple-600 text-base">GAME ZONE</span></h2>
+            
+            <!-- Student Name Input Field -->
+            <div class="w-full mt-3 mb-2 text-left">
+                <label for="student-name-input" class="block text-xs font-extrabold text-purple-800 mb-1 text-center">
+                    👧👦 नन्हे उस्ताद का नाम लिखें:
+                </label>
+                <input id="student-name-input" type="text" maxlength="18" placeholder="जैसे: Aarav / Khushi" 
+                    class="w-full px-3.5 py-2.5 rounded-2xl border-2 border-purple-300 bg-purple-50 text-center font-black text-base text-pink-600 focus:outline-none focus:border-pink-500 shadow-inner" />
+            </div>
+
+            <p class="text-[11px] font-bold text-gray-500 mb-3">
+                🌟 30, 50, 70 और 100 सितारों पर विशेष शाबाशी!
+            </p>
+
+            <button type="button" onclick="unlockAudioAndStart()" class="w-full py-3 bg-gradient-to-r from-pink-500 to-rose-500 active:scale-95 text-white font-extrabold rounded-2xl shadow-lg text-base border-b-4 border-rose-700 cursor-pointer">
+                चलो खेल शुरू करें! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= SPECIAL MILESTONE CELEBRATION MODAL ================= -->
+    <div id="milestone-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-5 text-center">
+        <div class="bg-gradient-to-b from-yellow-100 via-white to-pink-50 rounded-3xl p-6 shadow-2xl border-4 border-yellow-400 max-w-xs w-full flex flex-col items-center animate-bounce">
+            <div class="text-6xl mb-1">🏆👏🌟</div>
+            <div id="milestone-title" class="text-2xl font-black text-pink-600 font-['Fredoka_One']">शाबाश!</div>
+            <div id="milestone-stars-badge" class="my-2 px-4 py-1 rounded-full bg-yellow-300 border-2 border-yellow-500 font-black text-lg text-purple-900 shadow">
+                🌟 30 Stars पूरे!
+            </div>
+            <p id="milestone-message" class="text-sm font-extrabold text-gray-800 mb-4 leading-snug">
+                आपने आज कुल 30 सितारे हासिल कर लिए हैं! शाबाश!
+            </p>
+            <button type="button" onclick="closeMilestoneModal()" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 active:scale-95 text-white font-black rounded-2xl shadow-lg text-base border-b-4 border-green-800 cursor-pointer">
+                आगे बढ़ें! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- Compact Mobile Header with Student Name & Global Star Bank -->
+    <header class="px-2.5 py-2 bg-white/95 shadow-sm z-30 flex items-center justify-between border-b-4 border-yellow-400 shrink-0">
+        <div class="flex items-center gap-1.5 min-w-0">
+            <span class="text-2xl shrink-0">🏫</span>
+            <div class="flex flex-col truncate">
+                <h1 class="text-sm sm:text-base font-black text-pink-600 tracking-wide font-['Fredoka_One'] leading-none truncate">GYANU AI By Rishi Sir </h1>
+                <div class="flex items-center gap-1 mt-0.5">
+                    <span id="header-student-badge" onclick="editStudentNamePrompt()" class="cursor-pointer text-[10px] font-extrabold bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full border border-purple-300 truncate max-w-[130px]">
+                        🎓 नन्हा उस्ताद ✏️
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Controls: Global Star Collector & Sound -->
+        <div class="flex items-center gap-2 shrink-0">
+            <div onclick="announceTotalStarsStatus()" class="cursor-pointer bg-gradient-to-r from-amber-300 to-yellow-400 px-3 py-1 rounded-full border-2 border-amber-500 shadow flex items-center gap-1 active:scale-95" title="कुल सितारे">
+                <span class="text-sm">🌟</span>
+                <span id="global-star-count" class="text-sm font-black text-purple-950 font-['Fredoka_One']">0</span>
+            </div>
+
+            <button id="sound-btn" type="button" onclick="toggleMute()" class="bg-yellow-300 active:scale-90 w-8 h-8 rounded-full border-2 border-yellow-500 shadow flex items-center justify-center text-sm cursor-pointer">
+                🔊
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Viewport Container -->
+    <main class="flex-1 w-full max-w-md mx-auto p-2 flex flex-col overflow-y-auto overflow-x-hidden min-h-0">
+
+        <!-- ================= 1. FULL-SCREEN 3D FLOATING CUBE STAGE (3D डिब्बे) ================= -->
+        <section id="screen-cards" class="flex-1 flex flex-col justify-between h-full min-h-0">
+            
+            <!-- Top 4-Category Selector (स्वर, व्यंजन, ABC, 123) -->
+            <div class="grid grid-cols-4 gap-1.5 bg-white/95 p-1 rounded-2xl shadow-sm border-2 border-purple-200 shrink-0">
+                <button type="button" onclick="switchCategory('swar')" id="tab-swar" class="py-1 rounded-xl text-xs font-extrabold bg-pink-500 text-white shadow active:scale-95 transition-all leading-tight cursor-pointer">
+                    स्वर<br><span class="text-[9px] opacity-90">अ - अः</span>
+                </button>
+                <button type="button" onclick="switchCategory('vyanjan')" id="tab-vyanjan" class="py-1 rounded-xl text-xs font-extrabold bg-white text-gray-700 active:scale-95 transition-all leading-tight cursor-pointer">
+                    व्यंजन<br><span class="text-[9px] opacity-75">क - ज्ञ</span>
+                </button>
+                <button type="button" onclick="switchCategory('english')" id="tab-english" class="py-1 rounded-xl text-xs font-extrabold bg-white text-gray-700 active:scale-95 transition-all leading-tight cursor-pointer">
+                    अंग्रेज़ी<br><span class="text-[9px] opacity-75">A B C</span>
+                </button>
+                <button type="button" onclick="switchCategory('numbers')" id="tab-numbers" class="py-1 rounded-xl text-xs font-extrabold bg-white text-gray-700 active:scale-95 transition-all leading-tight cursor-pointer">
+                    गिनती<br><span class="text-[9px] opacity-75">1 - 10</span>
+                </button>
+            </div>
+
+            <!-- Interactive Instruction Banner -->
+            <div class="flex items-center justify-between bg-white/80 px-3 py-1 rounded-full border border-purple-200 shadow-sm shrink-0 mt-1">
+                <span id="stage-counter-pill" class="text-xs font-black text-pink-600 bg-pink-100 px-2.5 py-0.5 rounded-full">1 / 13</span>
+                <span id="stage-hint-text" class="text-xs font-extrabold text-purple-800 animate-pulse">👇 3D डिब्बे को छुओ (+1 🌟)</span>
+                <button type="button" onclick="speakCurrentCardItem()" class="text-sm bg-yellow-300 px-2 py-0.5 rounded-full border border-yellow-500 shadow-sm active:scale-90 cursor-pointer">🔊</button>
+            </div>
+
+            <!-- Center Giant 3D Cube & 3D Real Photo Object Stage -->
+            <div class="flex-1 flex flex-col items-center justify-center relative min-h-0 my-0.5">
+                <div class="scene-3d-stage">
+                    
+                    <!-- Floating 3D Cube -->
+                    <div id="interactive-3d-cube" class="cube-3d-wrapper" onclick="handleCubeOrObjectTap(event)">
+                        <div class="cube-face face-front" id="cube-face-front"></div>
+                        <div class="cube-face face-back" id="cube-face-back"></div>
+                        <div class="cube-face face-right" id="cube-face-right"></div>
+                        <div class="cube-face face-left" id="cube-face-left"></div>
+                        <div class="cube-face face-top" id="cube-face-top"></div>
+                        <div class="cube-face face-bottom" id="cube-face-bottom"></div>
+                    </div>
+
+                    <!-- Floating 3D Real Photo Card Display -->
+                    <div id="interactive-3d-object" class="object-3d-stage" onclick="handleCubeOrObjectTap(event)"></div>
+
+                </div>
+
+                <!-- Realistic Floor Shadow -->
+                <div class="stage-floor-shadow"></div>
+            </div>
+
+            <!-- Quick-Jump Mini Character Strip -->
+            <div id="char-strip" class="flex items-center gap-1.5 overflow-x-auto py-1 px-1 shrink-0"></div>
+
+            <!-- Giant Nursery-Friendly Prev / Next Controls -->
+            <div class="grid grid-cols-2 gap-3 pt-1 shrink-0">
+                <button type="button" onclick="prevCardItem()" class="py-2 bg-white hover:bg-purple-50 active:scale-95 rounded-2xl border-b-4 border-purple-300 shadow-md flex items-center justify-center gap-2 font-black text-purple-700 text-base cursor-pointer">
+                    <span class="text-lg">◀</span> पिछला
+                </button>
+                <button type="button" onclick="nextCardItem()" class="py-2 bg-gradient-to-r from-pink-500 to-rose-500 active:scale-95 rounded-2xl border-b-4 border-rose-700 shadow-md flex items-center justify-center gap-2 font-black text-white text-base cursor-pointer">
+                    अगला <span class="text-lg">▶</span>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ================= 2. TARGET-BASED BALLOON POPPING GAME (गुब्बारे फोड़ो) ================= -->
+        <section id="screen-game" class="hidden flex-1 flex flex-col gap-1.5 h-full min-h-0">
+            
+            <!-- Sky Stage Container -->
+            <div class="relative flex-1 w-full bg-gradient-to-b from-sky-400 via-sky-200 to-emerald-100 rounded-3xl overflow-hidden border-4 border-sky-500 shadow-xl min-h-0">
+                
+                <!-- Decorative Clouds -->
+                <div class="absolute top-14 left-4 text-4xl opacity-55 pointer-events-none">☁️</div>
+                <div class="absolute top-24 right-5 text-5xl opacity-45 pointer-events-none">☁️</div>
+                <div class="absolute bottom-10 left-8 text-4xl opacity-40 pointer-events-none">☁️</div>
+
+                <!-- Top Header Bar with CENTER TARGET CHARACTER & Score -->
+                <div class="absolute top-2 left-2 right-2 flex items-center justify-between z-30 pointer-events-none">
+                    
+                    <!-- Left: Round Score Counter out of 10 -->
+                    <div class="bg-white/95 px-3 py-1 rounded-2xl text-xs font-extrabold text-blue-900 shadow-md border-2 border-blue-300 flex items-center gap-1">
+                        <span>🎈</span>
+                        <span id="game-score" class="text-pink-600 text-base font-black">0</span>
+                        <span class="text-gray-500">/ 10</span>
+                    </div>
+
+                    <!-- CENTER: TARGET CHARACTER TO POP -->
+                    <div onclick="announceCurrentBalloonTarget()" class="pointer-events-auto cursor-pointer target-badge-pulse bg-yellow-300 px-3.5 py-1 rounded-2xl border-4 border-white shadow-xl flex items-center gap-2 active:scale-95">
+                        <div class="flex flex-col items-center leading-none">
+                            <span class="text-[9px] font-black text-purple-900 uppercase">यह गुब्बारा फोड़ो</span>
+                            <span id="balloon-target-char" class="text-2xl font-black text-pink-600 font-['Fredoka_One'] drop-shadow-sm mt-0.5">अ</span>
+                        </div>
+                        <span class="text-sm bg-white/80 rounded-full w-6 h-6 flex items-center justify-center shadow-sm">🔊</span>
+                    </div>
+
+                    <!-- Right: Reset Mini Button -->
+                    <button type="button" onclick="startBalloonGame()" class="pointer-events-auto bg-white/95 active:scale-90 p-2 rounded-2xl text-xs font-extrabold text-purple-700 shadow-md border-2 border-purple-200 cursor-pointer" title="नया खेल">
+                        🔄
+                    </button>
+                </div>
+
+                <!-- Balloon Spawning Sky Area -->
+                <div id="balloon-sky"></div>
+
+                <!-- 10-POINT ROUND WINNER CELEBRATION OVERLAY -->
+                <div id="balloon-winner-modal" class="hidden absolute inset-0 z-40 bg-black/75 backdrop-blur-sm flex flex-col items-center justify-center p-5 text-center">
+                    <div class="bg-white rounded-3xl p-6 shadow-2xl border-4 border-yellow-400 max-w-xs w-full flex flex-col items-center animate-bounce">
+                        <div class="text-6xl mb-1">🏆</div>
+                        <div id="balloon-win-title" class="text-2xl font-black text-pink-600 font-['Fredoka_One']">शाबाश! विजेता! 🎉</div>
+                        <p id="balloon-win-desc" class="text-sm font-extrabold text-purple-800 mt-1 mb-4">
+                            आपने 10 सही गुब्बारे फोड़कर जीत हासिल की!
+                        </p>
+                        <button type="button" onclick="startBalloonGame()" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 active:scale-95 text-white font-black rounded-2xl shadow-lg text-base border-b-4 border-green-800 cursor-pointer">
+                            फिर से खेलें! 🔄
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom 5-Category Selector for Balloon Game -->
+            <div class="grid grid-cols-5 gap-1 bg-white/95 p-1 rounded-2xl shadow-sm border-2 border-sky-300 shrink-0">
+                <button type="button" onclick="setBalloonCategory('swar')" id="bcat-swar" class="py-1.5 rounded-xl text-[11px] font-extrabold bg-pink-500 text-white shadow active:scale-95 transition-all cursor-pointer">
+                    स्वर
+                </button>
+                <button type="button" onclick="setBalloonCategory('vyanjan')" id="bcat-vyanjan" class="py-1.5 rounded-xl text-[11px] font-extrabold bg-sky-50 text-sky-900 active:scale-95 transition-all cursor-pointer">
+                    व्यंजन
+                </button>
+                <button type="button" onclick="setBalloonCategory('english')" id="bcat-english" class="py-1.5 rounded-xl text-[11px] font-extrabold bg-sky-50 text-sky-900 active:scale-95 transition-all cursor-pointer">
+                    A B C
+                </button>
+                <button type="button" onclick="setBalloonCategory('numbers')" id="bcat-numbers" class="py-1.5 rounded-xl text-[11px] font-extrabold bg-sky-50 text-sky-900 active:scale-95 transition-all cursor-pointer">
+                    1 2 3
+                </button>
+                <button type="button" onclick="setBalloonCategory('mix')" id="bcat-mix" class="py-1.5 rounded-xl text-[11px] font-extrabold bg-sky-50 text-sky-900 active:scale-95 transition-all cursor-pointer">
+                    मिक्स 🌟
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ================= 3. GIANT MAGIC TRACING SLATE ================= -->
+        <section id="screen-slate" class="hidden flex-1 flex flex-col gap-1.5 h-full min-h-0">
+            <!-- Category Selector for Slate Writing -->
+            <div class="grid grid-cols-4 gap-1 bg-white/95 p-1 rounded-2xl shadow-sm border border-purple-200 shrink-0">
+                <button type="button" onclick="setSlateCategory('swar')" id="slate-cat-swar" class="py-1 rounded-xl text-[11px] font-extrabold bg-purple-600 text-white shadow active:scale-95 transition-all cursor-pointer">स्वर</button>
+                <button type="button" onclick="setSlateCategory('vyanjan')" id="slate-cat-vyanjan" class="py-1 rounded-xl text-[11px] font-extrabold bg-purple-50 text-purple-800 active:scale-95 transition-all cursor-pointer">व्यंजन</button>
+                <button type="button" onclick="setSlateCategory('english')" id="slate-cat-english" class="py-1 rounded-xl text-[11px] font-extrabold bg-purple-50 text-purple-800 active:scale-95 transition-all cursor-pointer">A B C</button>
+                <button type="button" onclick="setSlateCategory('numbers')" id="slate-cat-numbers" class="py-1 rounded-xl text-[11px] font-extrabold bg-purple-50 text-purple-800 active:scale-95 transition-all cursor-pointer">1 2 3</button>
+            </div>
+
+            <!-- Tracing Character Switcher & Chalk Colors Bar -->
+            <div class="flex items-center justify-between bg-white px-2 py-1 rounded-2xl shadow-sm border border-purple-200 shrink-0">
+                <div class="flex items-center gap-1">
+                    <button type="button" onclick="prevTraceChar()" class="w-7 h-7 rounded-xl bg-purple-100 active:scale-90 font-black text-purple-700 text-sm shadow-sm cursor-pointer">◀</button>
+                    <span id="current-trace-badge" class="px-2 py-0.5 rounded-xl bg-pink-100 border-2 border-pink-300 font-black text-pink-600 text-base min-w-[38px] text-center">अ</span>
+                    <button type="button" onclick="nextTraceChar()" class="w-7 h-7 rounded-xl bg-purple-100 active:scale-90 font-black text-purple-700 text-sm shadow-sm cursor-pointer">▶</button>
+                    <button type="button" onclick="speakCurrentTrace()" class="px-1.5 py-1 rounded-xl bg-yellow-300 font-extrabold text-[10px] text-gray-900 active:scale-90 shadow border border-yellow-500 cursor-pointer">
+                        🔊
+                    </button>
+                </div>
+
+                <!-- Color Chalks + Rainbow Brush + Clear + Done Reward -->
+                <div class="flex items-center gap-1">
+                    <button type="button" onclick="setSlateColor('#FF1493')" class="w-6 h-6 rounded-full bg-pink-500 border-2 border-white shadow active:scale-90 cursor-pointer"></button>
+                    <button type="button" onclick="setSlateColor('#38BDF8')" class="w-6 h-6 rounded-full bg-sky-400 border-2 border-white shadow active:scale-90 cursor-pointer"></button>
+                    <button type="button" onclick="setSlateColor('#FACC15')" class="w-6 h-6 rounded-full bg-yellow-400 border-2 border-white shadow active:scale-90 cursor-pointer"></button>
+                    <button type="button" onclick="setSlateColor('rainbow')" class="w-6 h-6 rounded-full bg-gradient-to-tr from-red-500 via-green-400 to-blue-500 border-2 border-white shadow active:scale-90 flex items-center justify-center text-[10px] cursor-pointer" title="जादुई सतरंगी ब्रश">🌈</button>
+                    <button type="button" onclick="clearSlate()" class="bg-red-500 text-white active:scale-90 px-2 py-1 rounded-xl text-[10px] font-extrabold shadow cursor-pointer">
+                        🧽
+                    </button>
+                    <button type="button" onclick="completeSlateTracing(event)" class="bg-emerald-500 text-white active:scale-90 px-2 py-1 rounded-xl text-[10px] font-extrabold shadow border border-emerald-700 cursor-pointer">
+                        ✅ लिखा!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slate Board -->
+            <div id="slate-wrapper" class="flex-1 w-full bg-neutral-900 rounded-3xl border-[6px] border-amber-900 shadow-xl relative overflow-hidden min-h-0 touch-none">
+                <div id="trace-guide-text" class="pointer-events-none absolute inset-0 flex items-center justify-center font-black select-none text-white/25 leading-none">
+                    अ
+                </div>
+                <canvas id="magic-slate" class="absolute inset-0 w-full h-full block cursor-crosshair z-10"></canvas>
+            </div>
+        </section>
+
+        <!-- ================= 4. AUDIO PICTURE & COUNTING QUIZ (बूझो पहेली) ================= -->
+        <section id="screen-quiz" class="hidden flex-1 flex flex-col justify-between h-full min-h-0">
+            <!-- Top Quiz Category Selector -->
+            <div class="grid grid-cols-4 gap-1 bg-white/95 p-1 rounded-2xl shadow-sm border-2 border-purple-200 shrink-0">
+                <button type="button" onclick="setQuizCategory('swar')" id="qcat-swar" class="py-1 rounded-xl text-[11px] font-extrabold bg-pink-500 text-white shadow active:scale-95 transition-all cursor-pointer">स्वर</button>
+                <button type="button" onclick="setQuizCategory('vyanjan')" id="qcat-vyanjan" class="py-1 rounded-xl text-[11px] font-extrabold bg-white text-gray-700 active:scale-95 transition-all cursor-pointer">व्यंजन</button>
+                <button type="button" onclick="setQuizCategory('english')" id="qcat-english" class="py-1 rounded-xl text-[11px] font-extrabold bg-white text-gray-700 active:scale-95 transition-all cursor-pointer">A B C</button>
+                <button type="button" onclick="setQuizCategory('numbers')" id="qcat-numbers" class="py-1 rounded-xl text-[11px] font-extrabold bg-white text-gray-700 active:scale-95 transition-all cursor-pointer">1 2 3 गिनो</button>
+            </div>
+
+            <!-- Quiz Question Prompt Card -->
+            <div onclick="announceQuizQuestion()" class="cursor-pointer bg-gradient-to-r from-purple-600 to-pink-500 text-white p-3 rounded-3xl shadow-lg border-4 border-white flex items-center justify-between active:scale-95 shrink-0 my-1">
+                <div class="flex flex-col">
+                    <span id="quiz-instruction-sub" class="text-[11px] font-bold text-yellow-200">👂 ध्यान से सुनो और सही चित्र छुओ:</span>
+                    <span id="quiz-question-text" class="text-xl font-black mt-0.5">बताओ, "अनार" कहाँ है?</span>
+                </div>
+                <span class="text-2xl bg-white/25 p-2 rounded-full">🔊</span>
+            </div>
+
+            <!-- 2x2 Big Real Photo / Pure Counting Choices Grid -->
+            <div id="quiz-options-grid" class="flex-1 grid grid-cols-2 gap-3 my-1 min-h-0">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Docked 4-Tab Bottom Navigation Bar -->
+    <nav class="w-full max-w-md mx-auto px-2 pb-1.5 pt-1 shrink-0 z-30">
+        <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border-2 border-purple-200 p-1 flex justify-around">
+            <button type="button" onclick="changeScreen('cards')" id="nav-cards" class="flex-1 py-1 flex flex-col items-center text-pink-600 font-extrabold text-[10px] active:scale-95 transition-all cursor-pointer">
+                <span class="text-base leading-tight">🧊</span>
+                <span>3D डिब्बे</span>
+            </button>
+            <button type="button" onclick="changeScreen('game')" id="nav-game" class="flex-1 py-1 flex flex-col items-center text-gray-500 font-bold text-[10px] active:scale-95 transition-all cursor-pointer">
+                <span class="text-base leading-tight">🎈</span>
+                <span>गुब्बारे फोड़ो</span>
+            </button>
+            <button type="button" onclick="changeScreen('slate')" id="nav-slate" class="flex-1 py-1 flex flex-col items-center text-gray-500 font-bold text-[10px] active:scale-95 transition-all cursor-pointer">
+                <span class="text-base leading-tight">🎨</span>
+                <span>जादुई स्लेट</span>
+            </button>
+            <button type="button" onclick="changeScreen('quiz')" id="nav-quiz" class="flex-1 py-1 flex flex-col items-center text-gray-500 font-bold text-[10px] active:scale-95 transition-all cursor-pointer">
+                <span class="text-base leading-tight">🤔</span>
+                <span>बूझो पहेली</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dedicated HTML5 Audio Player for Cloud Female Hindi Voice on Hosted Servers -->
+    <audio id="cloud-hindi-player" preload="auto" playsinline></audio>
+
+    <script>
+        /**
+         * =========================================================================
+         * 1. COMPLETE DATA REPOSITORY WITH CURATED REAL PHOTOS & EMOJI FALLBACKS
+         * =========================================================================
+         */
+        const learningData = {
+            swar: [
+                { letter: 'अ', word: 'अनार', emoji: '🍎', img: 'https://loremflickr.com/320/320/pomegranate,fruit?lock=101', count: 1, speak: 'अ से अनार' },
+                { letter: 'आ', word: 'आम', emoji: '🥭', img: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80', count: 1, speak: 'आ से आम' },
+                { letter: 'इ', word: 'इमली', emoji: '🌿', img: 'https://loremflickr.com/320/320/tamarind?lock=103', count: 1, speak: 'इ से इमली' },
+                { letter: 'ई', word: 'ईख', emoji: '🎋', img: 'https://loremflickr.com/320/320/sugarcane?lock=104', count: 1, speak: 'ई से ईख' },
+                { letter: 'उ', word: 'उल्लू', emoji: '🦉', img: 'https://images.unsplash.com/photo-1543549790-8b5f4a028cfb?w=400&q=80', count: 1, speak: 'उ से उल्लू' },
+                { letter: 'ऊ', word: 'ऊन', emoji: '🧶', img: 'https://loremflickr.com/320/320/yarn,wool?lock=106', count: 1, speak: 'ऊ से ऊन' },
+                { letter: 'ऋ', word: 'ऋषि', emoji: '🧘', img: 'https://loremflickr.com/320/320/meditation,yoga?lock=107', count: 1, speak: 'ऋ से ऋषि' },
+                { letter: 'ए', word: 'एड़ी', emoji: '🦶', img: 'https://loremflickr.com/320/320/baby,foot?lock=108', count: 1, speak: 'ए से एड़ी' },
+                { letter: 'ऐ', word: 'ऐनक', emoji: '👓', img: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80', count: 1, speak: 'ऐ से ऐनक' },
+                { letter: 'ओ', word: 'ओखली', emoji: '🥣', img: 'https://loremflickr.com/320/320/mortar,pestle?lock=110', count: 1, speak: 'ओ से ओखली' },
+                { letter: 'औ', word: 'औरत', emoji: '👩', img: 'https://loremflickr.com/320/320/indian,woman,smile?lock=111', count: 1, speak: 'औ से औरत' },
+                { letter: 'अं', word: 'अंगूर', emoji: '🍇', img: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&q=80', count: 1, speak: 'अं से अंगूर' },
+                { letter: 'अः', word: 'प्रातः (नमस्कार)', emoji: '🙏', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&q=80', count: 1, speak: 'अः खाली, बच्चों बजाओ ताली' }
+            ],
+            vyanjan: [
+                { letter: 'क', word: 'कबूतर', emoji: '🕊️', img: 'https://images.unsplash.com/photo-1549608276-5786777e6587?w=400&q=80', count: 1, speak: 'क से कबूतर' },
+                { letter: 'ख', word: 'खरगोश', emoji: '🐇', img: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&q=80', count: 1, speak: 'ख से खरगोश' },
+                { letter: 'ग', word: 'गमला', emoji: '🪴', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80', count: 1, speak: 'ग से गमला' },
+                { letter: 'घ', word: 'घड़ी', emoji: '⏰', img: 'https://images.unsplash.com/photo-1508615039623-a25605d2b022?w=400&q=80', count: 1, speak: 'घ से घड़ी' },
+                { letter: 'च', word: 'चम्मच', emoji: '🥄', img: 'https://loremflickr.com/320/320/spoon,cutlery?lock=205', count: 1, speak: 'च से चम्मच' },
+                { letter: 'छ', word: 'छतरी', emoji: '☂️', img: 'https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?w=400&q=80', count: 1, speak: 'छ से छतरी' },
+                { letter: 'ज', word: 'जहाज़', emoji: '🚢', img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=400&q=80', count: 1, speak: 'ज से जहाज़' },
+                { letter: 'झ', word: 'झंडा', emoji: '🇮🇳', img: 'https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400&q=80', count: 1, speak: 'झ से झंडा' },
+                { letter: 'ट', word: 'टमाटर', emoji: '🍅', img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=80', count: 1, speak: 'ट से टमाटर' },
+                { letter: 'ठ', word: 'ठेला', emoji: '🛒', img: 'https://loremflickr.com/320/320/wooden,cart?lock=210', count: 1, speak: 'ठ से ठेला' },
+                { letter: 'ड', word: 'डमरू', emoji: '🥁', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400&q=80', count: 1, speak: 'ड से डमरू' },
+                { letter: 'ढ', word: 'ढोलक', emoji: '🪘', img: 'https://loremflickr.com/320/320/drum,percussion?lock=212', count: 1, speak: 'ढ से ढोलक' },
+                { letter: 'त', word: 'तरबूज़', emoji: '🍉', img: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&q=80', count: 1, speak: 'त से तरबूज़' },
+                { letter: 'थ', word: 'थर्मस', emoji: '🍼', img: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&q=80', count: 1, speak: 'थ से थर्मस' },
+                { letter: 'द', word: 'दवात', emoji: '🖋️', img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&q=80', count: 1, speak: 'द से दवात' },
+                { letter: 'ध', word: 'धनुष', emoji: '🏹', img: 'https://loremflickr.com/320/320/archery,bow?lock=216', count: 1, speak: 'ध से धनुष' },
+                { letter: 'न', word: 'नल', emoji: '🚰', img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80', count: 1, speak: 'न से नल' },
+                { letter: 'प', word: 'पतंग', emoji: '🪁', img: 'https://loremflickr.com/320/320/kite,flying?lock=218', count: 1, speak: 'प से पतंग' },
+                { letter: 'फ', word: 'फल', emoji: '🧺', img: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80', count: 1, speak: 'फ से फल' },
+                { letter: 'ब', word: 'बतख', emoji: '🦆', img: 'https://images.unsplash.com/photo-1555852095-64e7428df0fa?w=400&q=80', count: 1, speak: 'ब से बतख' },
+                { letter: 'भ', word: 'भालू', emoji: '🐻', img: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=400&q=80', count: 1, speak: 'भ से भालू' },
+                { letter: 'म', word: 'मछली', emoji: '🐟', img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=400&q=80', count: 1, speak: 'म से मछली' },
+                { letter: 'य', word: 'यज्ञ', emoji: '🔥', img: 'https://loremflickr.com/320/320/bonfire,fire?lock=223', count: 1, speak: 'य से यज्ञ' },
+                { letter: 'र', word: 'रथ', emoji: '🛞', img: 'https://loremflickr.com/320/320/horse,carriage?lock=224', count: 1, speak: 'र से रथ' },
+                { letter: 'ल', word: 'लट्टू', emoji: '🪀', img: 'https://loremflickr.com/320/320/spinning,top,toy?lock=225', count: 1, speak: 'ल से लट्टू' },
+                { letter: 'व', word: 'वन', emoji: '🌳', img: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=80', count: 1, speak: 'व से वन' },
+                { letter: 'श', word: 'शेर', emoji: '🦁', img: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400&q=80', count: 1, speak: 'श से शेर' },
+                { letter: 'ष', word: 'षट्कोण', emoji: '✡️', img: 'https://loremflickr.com/320/320/hexagon,pattern?lock=228', count: 1, speak: 'ष से षट्कोण' },
+                { letter: 'स', word: 'सेब', emoji: '🍎', img: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&q=80', count: 1, speak: 'स से सेब' },
+                { letter: 'ह', word: 'हाथी', emoji: '🐘', img: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=400&q=80', count: 1, speak: 'ह से हाथी' },
+                { letter: 'क्ष', word: 'क्षत्रिय', emoji: '⚔️', img: 'https://loremflickr.com/320/320/sword,shield?lock=231', count: 1, speak: 'क्ष से क्षत्रिय' },
+                { letter: 'त्र', word: 'त्रिशूल', emoji: '🔱', img: 'https://loremflickr.com/320/320/trident,statue?lock=232', count: 1, speak: 'त्र से त्रिशूल' },
+                { letter: 'ज्ञ', word: 'ज्ञानी', emoji: '📖', img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80', count: 1, speak: 'ज्ञ से ज्ञानी' }
+            ],
+            english: [
+                { letter: 'A', word: 'Apple', emoji: '🍎', img: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&q=80', count: 1, speak: 'ए फॉर एप्पल' },
+                { letter: 'B', word: 'Ball', emoji: '⚽', img: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=400&q=80', count: 1, speak: 'बी फॉर बॉल' },
+                { letter: 'C', word: 'Cat', emoji: '🐱', img: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80', count: 1, speak: 'सी फॉर कैट' },
+                { letter: 'D', word: 'Dog', emoji: '🐶', img: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&q=80', count: 1, speak: 'डी फॉर डॉग' },
+                { letter: 'E', word: 'Elephant', emoji: '🐘', img: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=400&q=80', count: 1, speak: 'ई फॉर एलीफैंट' },
+                { letter: 'F', word: 'Fish', emoji: '🐟', img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=400&q=80', count: 1, speak: 'एफ फॉर फिश' },
+                { letter: 'G', word: 'Grapes', emoji: '🍇', img: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&q=80', count: 1, speak: 'जी फॉर ग्रेप्स' },
+                { letter: 'H', word: 'Hat', emoji: '🤠', img: 'https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400&q=80', count: 1, speak: 'एच फॉर हैट' },
+                { letter: 'I', word: 'Ice Cream', emoji: '🍦', img: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&q=80', count: 1, speak: 'आई फॉर आइसक्रीम' },
+                { letter: 'J', word: 'Juice', emoji: '🧃', img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80', count: 1, speak: 'जे फॉर जूस' },
+                { letter: 'K', word: 'Kite', emoji: '🪁', img: 'https://loremflickr.com/320/320/kite,sky?lock=311', count: 1, speak: 'के फॉर काइट' },
+                { letter: 'L', word: 'Lion', emoji: '🦁', img: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400&q=80', count: 1, speak: 'एल फॉर लायन' },
+                { letter: 'M', word: 'Monkey', emoji: '🐒', img: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=400&q=80', count: 1, speak: 'एम फॉर मंकी' },
+                { letter: 'N', word: 'Nest', emoji: '🪺', img: 'https://loremflickr.com/320/320/bird,nest?lock=314', count: 1, speak: 'एन फॉर नेस्ट' },
+                { letter: 'O', word: 'Orange', emoji: '🍊', img: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=400&q=80', count: 1, speak: 'ओ फॉर ऑरेंज' },
+                { letter: 'P', word: 'Parrot', emoji: '🦜', img: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=400&q=80', count: 1, speak: 'पी फॉर पैरट' },
+                { letter: 'Q', word: 'Queen', emoji: '👑', img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&q=80', count: 1, speak: 'क्यू फॉर क्वीन' },
+                { letter: 'R', word: 'Rabbit', emoji: '🐰', img: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&q=80', count: 1, speak: 'आर फॉर रैबिट' },
+                { letter: 'S', word: 'Sun', emoji: '☀️', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&q=80', count: 1, speak: 'एस फॉर सन' },
+                { letter: 'T', word: 'Tiger', emoji: '🐯', img: 'https://images.unsplash.com/photo-1508817628294-5a453fa0b8fb?w=400&q=80', count: 1, speak: 'टी फॉर टाइगर' },
+                { letter: 'U', word: 'Umbrella', emoji: '☂️', img: 'https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?w=400&q=80', count: 1, speak: 'यू फॉर अम्ब्रेला' },
+                { letter: 'V', word: 'Van', emoji: '🚐', img: 'https://images.unsplash.com/photo-1527786356703-4b100091cd2c?w=400&q=80', count: 1, speak: 'वी फॉर वैन' },
+                { letter: 'W', word: 'Watch', emoji: '⌚', img: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400&q=80', count: 1, speak: 'डब्ल्यू फॉर वॉच' },
+                { letter: 'X', word: 'Xylophone', emoji: '🎹', img: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=400&q=80', count: 1, speak: 'एक्स फॉर ज़ाइलोफ़ोन' },
+                { letter: 'Y', word: 'Yacht', emoji: '⛵', img: 'https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=400&q=80', count: 1, speak: 'वाई फॉर यॉट' },
+                { letter: 'Z', word: 'Zebra', emoji: '🦓', img: 'https://images.unsplash.com/photo-1501706362039-c06b2d715385?w=400&q=80', count: 1, speak: 'ज़ेड फॉर ज़ेब्रा' }
+            ],
+            numbers: [
+                { letter: '1', itemName: 'सूरज', word: '1 सूरज (One)', emoji: '☀️', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&q=80', count: 1, speak: 'एक सूरज' },
+                { letter: '2', itemName: 'तितलियाँ', word: '2 तितलियाँ (Two)', emoji: '🦋', img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80', count: 2, speak: 'दो तितलियाँ' },
+                { letter: '3', itemName: 'कारें', word: '3 कारें (Three)', emoji: '🚗', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&q=80', count: 3, speak: 'तीन कारें' },
+                { letter: '4', itemName: 'सेब', word: '4 सेब (Four)', emoji: '🍎', img: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&q=80', count: 4, speak: 'चार सेब' },
+                { letter: '5', itemName: 'टॉफ़ियाँ', word: '5 टॉफ़ियाँ (Five)', emoji: '🍬', img: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=400&q=80', count: 5, speak: 'पाँच टॉफ़ियाँ' },
+                { letter: '6', itemName: 'फूल', word: '6 फूल (Six)', emoji: '🌸', img: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&q=80', count: 6, speak: 'छह फूल' },
+                { letter: '7', itemName: 'गुब्बारे', word: '7 गुब्बारे (Seven)', emoji: '🎈', img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80', count: 7, speak: 'सात गुब्बारे' },
+                { letter: '8', itemName: 'आम', word: '8 आम (Eight)', emoji: '🥭', img: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80', count: 8, speak: 'आठ आम' },
+                { letter: '9', itemName: 'आइसक्रीम', word: '9 आइसक्रीम (Nine)', emoji: '🍦', img: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&q=80', count: 9, speak: 'नौ आइसक्रीम' },
+                { letter: '10', itemName: 'तारे', word: '10 तारे (Ten)', emoji: '⭐', img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=80', count: 10, speak: 'दस तारे' }
+            ]
+        };
+
+        /**
+         * =========================================================================
+         * 2. STUDENT PROFILE & GLOBAL PAUSE-CAPABLE MILESTONE ENGINE
+         * =========================================================================
+         */
+        let studentName = '';
+        let totalStars = 0;
+        const SPECIAL_MILESTONES = [30, 50, 70, 100];
+        let achievedMilestones = [];
+        let rewardedCubesSet = new Set();
+
+        let isMilestonePaused = false;
+        let postMilestoneCallback = null;
+
+        let currentCategory = 'swar';
+        let currentCardIndex = 0;
+        let isCubeBroken = false;
+
+        let slateCategory = 'swar';
+        let traceIndex = 0;
+        let hasDrawnOnCurrentSlate = false;
+
+        let quizCategory = 'swar';
+        let currentQuizTarget = null;
+
+        let audioMuted = false;
+        let audioContext = null;
+        let availableVoices = [];
+        let hindiVoiceObj = null;
+        let speechTimerId = null;
+
+        // Global reference so Mobile Garbage Collector NEVER deletes active utterance
+        window.activeUtterance = null;
+
+        const cubeColorThemes = [
+            'linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%)',
+            'linear-gradient(135deg, #00C9FF 0%, #0072FF 100%)',
+            'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+            'linear-gradient(135deg, #F7971E 0%, #FFD200 100%)',
+            'linear-gradient(135deg, #DA22FF 0%, #9733EE 100%)'
+        ];
+
+        // Background Preloader for Smooth Real Photo Transitions
+        function preloadNeighborImages() {
+            try {
+                const list = learningData[currentCategory];
+                if (!list) return;
+                const nextIdx = (currentCardIndex + 1) % list.length;
+                const prevIdx = (currentCardIndex - 1 + list.length) % list.length;
+                [list[currentCardIndex], list[nextIdx], list[prevIdx]].forEach(it => {
+                    if (it && it.img) {
+                        const preloadImg = new Image();
+                        preloadImg.referrerPolicy = 'no-referrer';
+                        preloadImg.src = it.img;
+                    }
+                });
+            } catch (e) {}
+        }
+
+        function updateStudentBadgeUI() {
+            const badge = document.getElementById('header-student-badge');
+            if (badge) {
+                badge.textContent = studentName ? `🎓 ${studentName} ✏️` : `🎓 नन्हा उस्ताद ✏️`;
+            }
+            const starEl = document.getElementById('global-star-count');
+            if (starEl) {
+                starEl.textContent = totalStars;
+            }
+        }
+
+        function editStudentNamePrompt() {
+            const entered = prompt('बच्चे का नाम लिखें (Enter Student Name):', studentName || '');
+            if (entered !== null) {
+                studentName = entered.trim();
+                try { localStorage.setItem('Gyanu_student_name', studentName); } catch (e) {}
+                updateStudentBadgeUI();
+                if (studentName) {
+                    speakSmart(`शाबाश ${studentName}!`);
+                }
+            }
+        }
+
+        function spawnFloatingStarFeedback(x, y) {
+            const el = document.createElement('div');
+            el.className = 'floating-star-pop text-2xl font-black text-amber-500 drop-shadow-md';
+            el.style.left = `${(x || window.innerWidth / 2) - 24}px`;
+            el.style.top = `${(y || window.innerHeight / 2) - 20}px`;
+            el.textContent = '+1 🌟';
+            document.body.appendChild(el);
+            setTimeout(() => {
+                if (el.parentNode) el.remove();
+            }, 950);
+        }
+
+        function addGlobalStars(amount = 1, evt = null, resumeCallback = null) {
+            totalStars += amount;
+            try { localStorage.setItem('Gyanu_total_stars', String(totalStars)); } catch (e) {}
+            document.getElementById('global-star-count').textContent = totalStars;
+
+            if (evt && (evt.clientX || (evt.touches && evt.touches[0]))) {
+                const cx = evt.clientX || evt.touches[0].clientX;
+                const cy = evt.clientY || evt.touches[0].clientY;
+                spawnFloatingStarFeedback(cx, cy);
+            } else {
+                spawnFloatingStarFeedback(window.innerWidth / 2, window.innerHeight / 2);
+            }
+
+            if (SPECIAL_MILESTONES.includes(totalStars) && !achievedMilestones.includes(totalStars)) {
+                achievedMilestones.push(totalStars);
+                postMilestoneCallback = resumeCallback;
+                triggerMilestoneCelebration(totalStars);
+                return true;
+            }
+            return false;
+        }
+
+        function triggerMilestoneCelebration(starCount) {
+            isMilestonePaused = true;
+            stopAllVoicePlayback();
+
+            const modal = document.getElementById('milestone-modal');
+            const titleEl = document.getElementById('milestone-title');
+            const badgeEl = document.getElementById('milestone-stars-badge');
+            const msgEl = document.getElementById('milestone-message');
+
+            const displayName = studentName ? studentName : 'नन्हे उस्ताद';
+
+            titleEl.textContent = `शाबाश ${displayName}! 🎉`;
+            badgeEl.textContent = `🌟 ${starCount} सितारे पूरे!`;
+            msgEl.textContent = `शाबाश ${displayName}! आपने आज कुल ${starCount} सितारे हासिल कर लिए हैं! ऐसे ही आगे बढ़ते रहो!`;
+
+            modal.classList.remove('hidden');
+
+            playClappingAndFanfareSound();
+            setTimeout(() => {
+                if (isMilestonePaused) {
+                    speakSmart(`शाबाश ${displayName}! आपने आज कुल ${starCount} सितारे हासिल कर लिए हैं, बहुत बढ़िया!`);
+                }
+            }, 300);
+        }
+
+        function closeMilestoneModal() {
+            document.getElementById('milestone-modal').classList.add('hidden');
+            stopAllVoicePlayback();
+            isMilestonePaused = false;
+            playPopSound();
+
+            const cb = postMilestoneCallback;
+            postMilestoneCallback = null;
+            if (typeof cb === 'function') {
+                cb();
+            }
+
+            const gameSection = document.getElementById('screen-game');
+            if (gameSection && !gameSection.classList.contains('hidden') && !isBalloonGameWon) {
+                updateBalloonsLoop();
+            }
+        }
+
+        function announceTotalStarsStatus() {
+            const displayName = studentName ? studentName : 'बच्चों';
+            const nextMilestone = SPECIAL_MILESTONES.find(m => m > totalStars) || 100;
+            speakSmart(`${displayName}, आपके पास कुल ${totalStars} सितारे हैं! अगला बड़ा इनाम ${nextMilestone} सितारों पर मिलेगा!`);
+        }
+
+        /**
+         * =========================================================================
+         * 3. DUAL-ENGINE FEMALE HINDI VOICE (CLOUD MP3 + FIXED NATIVE TTS)
+         * =========================================================================
+         */
+        function loadDeviceVoices() {
+            if (!('speechSynthesis' in window)) return;
+            const voices = window.speechSynthesis.getVoices() || [];
+            if (voices.length > 0) {
+                availableVoices = voices;
+                const allHindiVoices = availableVoices.filter(v => {
+                    const l = (v.lang || '').toLowerCase().replace('_', '-');
+                    const n = (v.name || '').toLowerCase();
+                    return l.startsWith('hi') || n.includes('hindi') || n.includes('हिन्दी') || n.includes('lekha') || n.includes('swara') || n.includes('kalpana');
+                });
+
+                hindiVoiceObj = allHindiVoices.find(v => {
+                    const n = (v.name || '').toLowerCase();
+                    return n.includes('female') || n.includes('lekha') || n.includes('swara') || n.includes('kalpana') || n.includes('google');
+                }) || allHindiVoices[0] || null;
+            }
+        }
+
+        if ('speechSynthesis' in window) {
+            loadDeviceVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = loadDeviceVoices;
+            }
+        }
+
+        function stopAllVoicePlayback() {
+            if (speechTimerId) {
+                clearTimeout(speechTimerId);
+                speechTimerId = null;
+            }
+            const player = document.getElementById('cloud-hindi-player');
+            if (player) {
+                try {
+                    player.pause();
+                } catch (e) {}
+            }
+            if ('speechSynthesis' in window) {
+                try {
+                    if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+                        window.speechSynthesis.cancel();
+                    }
+                } catch (e) {}
+            }
+        }
+
+        function unlockAudioAndStart() {
+            const inputEl = document.getElementById('student-name-input');
+            if (inputEl && inputEl.value.trim()) {
+                studentName = inputEl.value.trim();
+                try { localStorage.setItem('Gyanu_student_name', studentName); } catch (e) {}
+            }
+            updateStudentBadgeUI();
+
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (AudioCtx && !audioContext) {
+                    audioContext = new AudioCtx();
+                }
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+            } catch (e) {}
+
+            const player = document.getElementById('cloud-hindi-player');
+            if (player) {
+                player.volume = 1.0;
+            }
+
+            const overlay = document.getElementById('audio-start-overlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+                overlay.classList.add('hidden');
+            }
+
+            loadDeviceVoices();
+            renderSingle3DStage();
+
+            const greetHindi = studentName
+                ? `ज्ञानू ए आई बाय ऋषि सर गेम ज़ोन में आपका स्वागत है, ${studentName}!`
+                : 'ज्ञानू ए आई बाय ऋषि सर गेम ज़ोन में आपका स्वागत है!';
+
+            speakSmart(greetHindi);
+        }
+
+        function speakSmart(hindiText) {
+            if (audioMuted || !hindiText) return;
+
+            stopAllVoicePlayback();
+
+            const isHostedServer = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+            const player = document.getElementById('cloud-hindi-player');
+
+            if (isHostedServer && navigator.onLine && player) {
+                const encoded = encodeURIComponent(hindiText);
+                player.src = `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=tw-ob&tl=hi&q=${encoded}`;
+                const playPromise = player.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        speakNativeHindiFixed(hindiText);
+                    });
+                    return;
+                }
+            }
+
+            speakNativeHindiFixed(hindiText);
+        }
+
+        function speakNativeHindiFixed(hindiText) {
+            if (audioMuted || !('speechSynthesis' in window)) return;
+
+            speechTimerId = setTimeout(() => {
+                try {
+                    if (window.speechSynthesis.paused) {
+                        window.speechSynthesis.resume();
+                    }
+
+                    if (availableVoices.length === 0) {
+                        loadDeviceVoices();
+                    }
+
+                    const utter = new SpeechSynthesisUtterance(hindiText);
+                    window.activeUtterance = utter;
+
+                    if (hindiVoiceObj) {
+                        utter.voice = hindiVoiceObj;
+                        utter.lang = hindiVoiceObj.lang || 'hi-IN';
+                    } else {
+                        utter.lang = 'hi-IN';
+                    }
+
+                    utter.rate = 0.86;
+                    utter.pitch = 1.1;
+                    utter.volume = 1.0;
+
+                    window.speechSynthesis.speak(utter);
+                } catch (err) {}
+            }, 60);
+        }
+
+        function playPopSound() {
+            if (audioMuted) return;
+            try {
+                if (!audioContext) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (AudioCtx) audioContext = new AudioCtx();
+                }
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                if (!audioContext) return;
+
+                const now = audioContext.currentTime;
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(520, now);
+                osc.frequency.exponentialRampToValueAtTime(110, now + 0.14);
+
+                gain.gain.setValueAtTime(0.45, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.start(now);
+                osc.stop(now + 0.15);
+            } catch (err) {}
+        }
+
+        function playClappingAndFanfareSound() {
+            if (audioMuted) return;
+            try {
+                if (!audioContext) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (AudioCtx) audioContext = new AudioCtx();
+                }
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                if (!audioContext) return;
+
+                const now = audioContext.currentTime;
+
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.50];
+                notes.forEach((freq, idx) => {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.11);
+                    gain.gain.setValueAtTime(0.28, now + idx * 0.11);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.35);
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+                    osc.start(now + idx * 0.11);
+                    osc.stop(now + idx * 0.11 + 0.36);
+                });
+
+                for (let c = 0; c < 14; c++) {
+                    const clapTime = now + c * 0.13 + (Math.random() * 0.03);
+                    const bufferSize = audioContext.sampleRate * 0.07;
+                    const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+                    const output = noiseBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioContext.sampleRate * 0.022));
+                    }
+
+                    const whiteNoise = audioContext.createBufferSource();
+                    whiteNoise.buffer = noiseBuffer;
+
+                    const filter = audioContext.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 1100 + Math.random() * 500;
+                    filter.Q.value = 1.8;
+
+                    const clapGain = audioContext.createGain();
+                    clapGain.gain.setValueAtTime(0.35, clapTime);
+                    clapGain.gain.exponentialRampToValueAtTime(0.01, clapTime + 0.065);
+
+                    whiteNoise.connect(filter);
+                    filter.connect(clapGain);
+                    clapGain.connect(audioContext.destination);
+
+                    whiteNoise.start(clapTime);
+                    whiteNoise.stop(clapTime + 0.07);
+                }
+            } catch (err) {}
+        }
+
+        function toggleMute() {
+            audioMuted = !audioMuted;
+            document.getElementById('sound-btn').textContent = audioMuted ? '🔇' : '🔊';
+            if (audioMuted) {
+                stopAllVoicePlayback();
+            } else {
+                speakSmart('आवाज़ चालू है');
+            }
+        }
+
+        /**
+         * =========================================================================
+         * 4. SECTION 1: SINGLE GIANT 3D CUBE <-> REAL PHOTO OBJECT ENGINE
+         * =========================================================================
+         */
+        function build3DObjectVisualMarkup(item) {
+            const count = item.count || 1;
+
+            // For Numbers 2 to 10: Show countable items + Real Photo miniature badge
+            if (count > 1) {
+                let sizeClass = 'text-4xl';
+                if (count >= 3 && count <= 4) sizeClass = 'text-3xl';
+                else if (count >= 5 && count <= 6) sizeClass = 'text-2xl';
+                else if (count >= 7) sizeClass = 'text-xl';
+
+                let emojisHtml = '';
+                for (let i = 0; i < count; i++) {
+                    emojisHtml += `<span class="${sizeClass} leading-tight inline-block emoji-3d-bounce">${item.emoji}</span>`;
+                }
+
+                return `
+                    <div class="flex flex-col items-center justify-center my-1 w-full">
+                        ${item.img ? `
+                        <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white shadow-md mb-1 bg-white flex items-center justify-center">
+                            <img src="${item.img}" alt="${item.word}" referrerpolicy="no-referrer" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'">
+                        </div>` : ''}
+                        <div class="flex flex-wrap items-center justify-center gap-1 px-1 max-w-full">${emojisHtml}</div>
+                    </div>
+                `;
+            }
+
+            // For Single Objects (Swar, Vyanjan, A-Z, Number 1): Show High-Res Real Photo with Instant Emoji Fallback
+            if (item.img) {
+                return `
+                    <div class="real-photo-frame">
+                        <img src="${item.img}" alt="${item.word}" referrerpolicy="no-referrer" 
+                             class="real-photo-img" 
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
+                        <div class="hidden text-[82px] leading-none emoji-3d-bounce">${item.emoji}</div>
+                        <span class="absolute bottom-1 right-1 text-lg bg-white/90 rounded-full px-1 shadow">${item.emoji}</span>
+                    </div>
+                `;
+            }
+
+            return `<div class="text-[90px] leading-none my-1 emoji-3d-bounce">${item.emoji}</div>`;
+        }
+
+        function renderSingle3DStage() {
+            const list = learningData[currentCategory];
+            const item = list[currentCardIndex];
+            const themeGradient = cubeColorThemes[currentCardIndex % cubeColorThemes.length];
+
+            isCubeBroken = false;
+            const cubeEl = document.getElementById('interactive-3d-cube');
+            const objEl = document.getElementById('interactive-3d-object');
+            cubeEl.classList.remove('cube-broken');
+            objEl.classList.remove('object-visible');
+
+            document.getElementById('stage-counter-pill').textContent = `${currentCardIndex + 1} / ${list.length}`;
+            document.getElementById('stage-hint-text').textContent = '👇 3D डिब्बे को छुओ (+1 🌟)';
+
+            const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
+            faces.forEach(f => {
+                const faceNode = document.getElementById(`cube-face-${f}`);
+                faceNode.style.background = themeGradient;
+                if (f === 'front') {
+                    faceNode.innerHTML = `
+                        <span class="text-white font-black font-['Fredoka_One'] text-[84px] leading-none drop-shadow-[0_6px_4px_rgba(0,0,0,0.35)]">${item.letter}</span>
+                        <span class="mt-2 text-xs font-extrabold text-white bg-black/20 px-3 py-0.5 rounded-full border border-white/40">छुओ मुझे 👆</span>
+                    `;
+                } else {
+                    faceNode.innerHTML = `
+                        <span class="text-white/90 font-black font-['Fredoka_One'] text-6xl select-none">${item.letter}</span>
+                    `;
+                }
+            });
+
+            const visualMarkup = build3DObjectVisualMarkup(item);
+            objEl.innerHTML = `
+                <div class="object-3d-card">
+                    <div class="w-full flex items-center justify-between">
+                        <span class="px-3 py-0.5 rounded-full bg-pink-500 text-white font-black text-base shadow">${item.letter}</span>
+                        <span class="text-[10px] font-extrabold text-amber-900 bg-amber-200/90 px-2.5 py-0.5 rounded-full">📸 असली चित्र ✨</span>
+                    </div>
+                    ${visualMarkup}
+                    <div class="w-full text-center bg-white/95 py-1 px-2 rounded-2xl border-2 border-amber-300 shadow-sm">
+                        <div class="text-base sm:text-lg font-black text-gray-800 leading-tight">${item.word}</div>
+                        <div class="text-[10px] font-extrabold text-pink-600">वापस डिब्बा बनाने के लिए छुओ ↩️</div>
+                    </div>
+                </div>
+            `;
+
+            renderMiniJumpStrip();
+            preloadNeighborImages();
+        }
+
+        function handleCubeOrObjectTap(evt) {
+            if (isMilestonePaused) return;
+            const list = learningData[currentCategory];
+            const item = list[currentCardIndex];
+            const cubeEl = document.getElementById('interactive-3d-cube');
+            const objEl = document.getElementById('interactive-3d-object');
+            const hintEl = document.getElementById('stage-hint-text');
+
+            if (!isCubeBroken) {
+                isCubeBroken = true;
+                cubeEl.classList.add('cube-broken');
+                objEl.classList.add('object-visible');
+                hintEl.textContent = '👇 चित्र को छुओ, वापस 3D डिब्बा बनेगा!';
+
+                const uniqueKey = `${currentCategory}_${item.letter}`;
+                let milestoneTriggered = false;
+                if (!rewardedCubesSet.has(uniqueKey)) {
+                    rewardedCubesSet.add(uniqueKey);
+                    milestoneTriggered = addGlobalStars(1, evt);
+                }
+
+                if (!milestoneTriggered) {
+                    speakSmart(item.speak);
+                }
+            } else {
+                isCubeBroken = false;
+                objEl.classList.remove('object-visible');
+                cubeEl.classList.remove('cube-broken');
+                hintEl.textContent = '👇 3D डिब्बे को छुओ (+1 🌟)';
+                speakSmart(item.speak.split(' ')[0]);
+            }
+        }
+
+        function speakCurrentCardItem() {
+            if (isMilestonePaused) return;
+            const item = learningData[currentCategory][currentCardIndex];
+            speakSmart(item.speak);
+        }
+
+        function prevCardItem() {
+            if (isMilestonePaused) return;
+            const list = learningData[currentCategory];
+            currentCardIndex = (currentCardIndex - 1 + list.length) % list.length;
+            renderSingle3DStage();
+            const item = list[currentCardIndex];
+            speakSmart(item.speak);
+        }
+
+        function nextCardItem() {
+            if (isMilestonePaused) return;
+            const list = learningData[currentCategory];
+            currentCardIndex = (currentCardIndex + 1) % list.length;
+            renderSingle3DStage();
+            const item = list[currentCardIndex];
+            speakSmart(item.speak);
+        }
+
+        function jumpToCardIndex(idx) {
+            if (isMilestonePaused) return;
+            currentCardIndex = idx;
+            renderSingle3DStage();
+            const item = learningData[currentCategory][currentCardIndex];
+            speakSmart(item.speak);
+        }
+
+        function renderMiniJumpStrip() {
+            const strip = document.getElementById('char-strip');
+            const list = learningData[currentCategory];
+            strip.innerHTML = '';
+
+            list.forEach((item, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                const isActive = idx === currentCardIndex;
+                btn.className = isActive
+                    ? 'px-3 py-1 rounded-xl font-black text-sm bg-pink-500 text-white shadow-md scale-105 shrink-0 transition-all cursor-pointer'
+                    : 'px-2.5 py-1 rounded-xl font-bold text-xs bg-white/80 text-gray-700 border border-purple-200 shrink-0 active:scale-90 transition-all cursor-pointer';
+                btn.textContent = item.letter;
+                btn.onclick = () => jumpToCardIndex(idx);
+                strip.appendChild(btn);
+
+                if (isActive) {
+                    setTimeout(() => {
+                        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }, 30);
+                }
+            });
+        }
+
+        function switchCategory(cat) {
+            if (isMilestonePaused) return;
+            currentCategory = cat;
+            currentCardIndex = 0;
+            ['swar', 'vyanjan', 'english', 'numbers'].forEach(c => {
+                const btn = document.getElementById(`tab-${c}`);
+                if (!btn) return;
+                if (c === cat) {
+                    btn.className = 'py-1 rounded-xl text-xs font-extrabold bg-pink-500 text-white shadow active:scale-95 transition-all leading-tight cursor-pointer';
+                } else {
+                    btn.className = 'py-1 rounded-xl text-xs font-extrabold bg-white text-gray-700 active:scale-95 transition-all leading-tight cursor-pointer';
+                }
+            });
+            renderSingle3DStage();
+            const firstItem = learningData[currentCategory][0];
+            speakSmart(firstItem.speak);
+        }
+
+        /**
+         * =========================================================================
+         * 5. SECTION 2: TARGET-BASED BALLOON GAME ENGINE
+         * =========================================================================
+         */
+        let balloonCategory = 'swar';
+        let currentBalloonTarget = null;
+        let balloonSpawnTimer = null;
+        let balloonFrameId = null;
+        let balloonsList = [];
+        let score = 0;
+        let spawnCounter = 0;
+        let isBalloonGameWon = false;
+
+        const vibrantBalloonStyles = [
+            'linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%)',
+            'linear-gradient(135deg, #00C9FF 0%, #0072FF 100%)',
+            'linear-gradient(135deg, #F7971E 0%, #FFD200 100%)',
+            'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+            'linear-gradient(135deg, #DA22FF 0%, #9733EE 100%)',
+            'linear-gradient(135deg, #FF0844 0%, #FFB199 100%)'
+        ];
+
+        function getBalloonPool() {
+            if (balloonCategory === 'mix') {
+                return [
+                    ...learningData.swar,
+                    ...learningData.vyanjan,
+                    ...learningData.english,
+                    ...learningData.numbers
+                ];
+            }
+            return learningData[balloonCategory] || learningData.swar;
+        }
+
+        function setBalloonCategory(cat) {
+            if (isMilestonePaused) return;
+            balloonCategory = cat;
+            ['swar', 'vyanjan', 'english', 'numbers', 'mix'].forEach(c => {
+                const btn = document.getElementById(`bcat-${c}`);
+                if (!btn) return;
+                if (c === cat) {
+                    btn.className = 'py-1.5 rounded-xl text-[11px] font-extrabold bg-pink-500 text-white shadow active:scale-95 transition-all cursor-pointer';
+                } else {
+                    btn.className = 'py-1.5 rounded-xl text-[11px] font-extrabold bg-sky-50 text-sky-900 active:scale-95 transition-all cursor-pointer';
+                }
+            });
+            startBalloonGame();
+        }
+
+        function pickNewBalloonTarget(announce = true) {
+            const pool = getBalloonPool();
+            let nextTarget = pool[Math.floor(Math.random() * pool.length)];
+            if (pool.length > 1 && currentBalloonTarget && nextTarget.letter === currentBalloonTarget.letter) {
+                nextTarget = pool[(pool.indexOf(nextTarget) + 1) % pool.length];
+            }
+            currentBalloonTarget = nextTarget;
+
+            const badgeEl = document.getElementById('balloon-target-char');
+            if (badgeEl) badgeEl.textContent = currentBalloonTarget.letter;
+
+            if (announce && !isMilestonePaused) {
+                announceCurrentBalloonTarget();
+            }
+        }
+
+        function announceCurrentBalloonTarget() {
+            if (!currentBalloonTarget || isMilestonePaused) return;
+            speakSmart(`${currentBalloonTarget.speak} वाला गुब्बारा फोड़ो`);
+        }
+
+        function startBalloonGame() {
+            stopBalloonGame();
+            const sky = document.getElementById('balloon-sky');
+            if (!sky) return;
+            sky.innerHTML = '';
+            balloonsList = [];
+            score = 0;
+            spawnCounter = 0;
+            isBalloonGameWon = false;
+
+            document.getElementById('game-score').textContent = score;
+            document.getElementById('balloon-winner-modal').classList.add('hidden');
+
+            pickNewBalloonTarget(true);
+
+            createSingleBalloon(8, true);
+            createSingleBalloon(-12, false);
+
+            balloonSpawnTimer = setInterval(() => {
+                if (!isBalloonGameWon && !isMilestonePaused) {
+                    spawnCounter++;
+                    const forceTarget = (spawnCounter % 2 === 0);
+                    createSingleBalloon(-18, forceTarget);
+                }
+            }, 1350);
+
+            updateBalloonsLoop();
+        }
+
+        function stopBalloonGame() {
+            if (balloonSpawnTimer) {
+                clearInterval(balloonSpawnTimer);
+                balloonSpawnTimer = null;
+            }
+            if (balloonFrameId) {
+                cancelAnimationFrame(balloonFrameId);
+                balloonFrameId = null;
+            }
+            balloonsList = [];
+            const sky = document.getElementById('balloon-sky');
+            if (sky) sky.innerHTML = '';
+        }
+
+        function triggerWinnerCelebration() {
+            isBalloonGameWon = true;
+            if (balloonSpawnTimer) {
+                clearInterval(balloonSpawnTimer);
+                balloonSpawnTimer = null;
+            }
+            const displayName = studentName ? studentName : 'नन्हे उस्ताद';
+            document.getElementById('balloon-win-title').textContent = `शाबाश ${displayName}! 🏆`;
+            document.getElementById('balloon-win-desc').textContent = `${displayName}, आपने 10 सही गुब्बारे फोड़कर राउंड जीत लिया!`;
+            document.getElementById('balloon-winner-modal').classList.remove('hidden');
+
+            playClappingAndFanfareSound();
+            setTimeout(() => {
+                speakSmart(`शाबाश ${displayName}! आप यह राउंड जीत गए!`);
+            }, 250);
+        }
+
+        function createSingleBalloon(startBottomPercent = -18, forceTarget = false) {
+            const sky = document.getElementById('balloon-sky');
+            if (!sky || isBalloonGameWon || isMilestonePaused) return;
+
+            const pool = getBalloonPool();
+            const item = (forceTarget && currentBalloonTarget)
+                ? currentBalloonTarget
+                : pool[Math.floor(Math.random() * pool.length)];
+
+            const bgGradient = vibrantBalloonStyles[Math.floor(Math.random() * vibrantBalloonStyles.length)];
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'balloon-wrapper';
+
+            const leftPercent = 8 + Math.floor(Math.random() * 66);
+            wrapper.style.left = `${leftPercent}%`;
+            wrapper.style.bottom = `${startBottomPercent}%`;
+
+            wrapper.innerHTML = `
+                <div class="balloon-body" style="background: ${bgGradient};">
+                    <span class="text-2xl font-black font-['Fredoka_One'] drop-shadow">${item.letter}</span>
+                    <span class="text-xs -mt-1">${item.emoji}</span>
+                    <div style="width: 10px; height: 7px; background: inherit; position: absolute; bottom: -5px; border-radius: 2px;"></div>
+                    <div style="width: 2px; height: 30px; background: rgba(80,80,80,0.6); position: absolute; bottom: -34px;"></div>
+                </div>
+            `;
+
+            let popped = false;
+            const handlePop = (e) => {
+                if (e) e.stopPropagation();
+                if (popped || isBalloonGameWon || isMilestonePaused) return;
+
+                if (currentBalloonTarget && item.letter === currentBalloonTarget.letter) {
+                    popped = true;
+                    playPopSound();
+
+                    score += 1;
+                    document.getElementById('game-score').textContent = score;
+
+                    const bodyEl = wrapper.querySelector('.balloon-body');
+                    if (bodyEl) bodyEl.classList.add('pop-effect');
+
+                    balloonsList = balloonsList.filter(b => b.el !== wrapper);
+                    setTimeout(() => {
+                        if (wrapper.parentNode) wrapper.remove();
+                    }, 180);
+
+                    const nextStepAfterPop = () => {
+                        if (score >= 10) {
+                            triggerWinnerCelebration();
+                        } else {
+                            pickNewBalloonTarget(true);
+                        }
+                    };
+
+                    const hitSpecialMilestone = addGlobalStars(1, e, nextStepAfterPop);
+                    if (!hitSpecialMilestone) {
+                        nextStepAfterPop();
+                    }
+                } else {
+                    const bodyEl = wrapper.querySelector('.balloon-body');
+                    if (bodyEl) {
+                        bodyEl.classList.remove('wrong-shake');
+                        void bodyEl.offsetWidth;
+                        bodyEl.classList.add('wrong-shake');
+                    }
+                    if (currentBalloonTarget) {
+                        speakSmart(`ओहो! ${currentBalloonTarget.speak} को ढूँढो`);
+                    }
+                }
+            };
+
+            wrapper.addEventListener('pointerdown', handlePop);
+            wrapper.addEventListener('click', handlePop);
+
+            sky.appendChild(wrapper);
+
+            balloonsList.push({
+                el: wrapper,
+                bottomPct: startBottomPercent,
+                baseLeftPct: leftPercent,
+                swaySeed: Math.random() * Math.PI * 2,
+                speedPct: 0.15 + Math.random() * 0.08
+            });
+        }
+
+        function updateBalloonsLoop() {
+            if (isMilestonePaused) return;
+
+            for (let i = balloonsList.length - 1; i >= 0; i--) {
+                const b = balloonsList[i];
+                b.bottomPct += b.speedPct;
+                b.swaySeed += 0.03;
+
+                const swayOffset = Math.sin(b.swaySeed) * 2.5;
+                b.el.style.bottom = `${b.bottomPct}%`;
+                b.el.style.left = `${b.baseLeftPct + swayOffset}%`;
+
+                if (b.bottomPct > 112) {
+                    if (b.el.parentNode) b.el.remove();
+                    balloonsList.splice(i, 1);
+                }
+            }
+
+            const gameSection = document.getElementById('screen-game');
+            if (gameSection && !gameSection.classList.contains('hidden') && !isBalloonGameWon && !isMilestonePaused) {
+                balloonFrameId = requestAnimationFrame(updateBalloonsLoop);
+            }
+        }
+
+        /**
+         * =========================================================================
+         * 6. SECTION 3: GIANT TRACING SLATE
+         * =========================================================================
+         */
+        const canvas = document.getElementById('magic-slate');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentDrawColor = '#FF1493';
+        let rainbowHue = 0;
+
+        function initSlateSize() {
+            const wrapper = document.getElementById('slate-wrapper');
+            if (!wrapper) return;
+            const rect = wrapper.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
+
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 18;
+        }
+
+        function getCanvasPoint(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = (e.touches && e.touches.length > 0) ? e.touches[0].clientX : e.clientX;
+            const clientY = (e.touches && e.touches.length > 0) ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startPaint(e) {
+            if (isMilestonePaused) return;
+            isDrawing = true;
+            hasDrawnOnCurrentSlate = true;
+            const p = getCanvasPoint(e);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            if (currentDrawColor !== 'rainbow') {
+                ctx.strokeStyle = currentDrawColor;
+            }
+        }
+
+        function movePaint(e) {
+            if (!isDrawing || isMilestonePaused) return;
+            const p = getCanvasPoint(e);
+
+            if (currentDrawColor === 'rainbow') {
+                rainbowHue = (rainbowHue + 8) % 360;
+                ctx.strokeStyle = `hsl(${rainbowHue}, 95%, 60%)`;
+                ctx.lineTo(p.x, p.y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+            } else {
+                ctx.lineTo(p.x, p.y);
+                ctx.stroke();
+            }
+        }
+
+        function endPaint() {
+            isDrawing = false;
+            ctx.closePath();
+        }
+
+        canvas.addEventListener('mousedown', startPaint);
+        canvas.addEventListener('mousemove', movePaint);
+        window.addEventListener('mouseup', endPaint);
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startPaint(e);
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            movePaint(e);
+        }, { passive: false });
+
+        window.addEventListener('touchend', endPaint);
+
+        function setSlateColor(c) {
+            currentDrawColor = c;
+            playPopSound();
+        }
+
+        function clearSlate(silent = false) {
+            if (!silent) playPopSound();
+            hasDrawnOnCurrentSlate = false;
+            const wrapper = document.getElementById('slate-wrapper').getBoundingClientRect();
+            ctx.clearRect(0, 0, wrapper.width, wrapper.height);
+        }
+
+        function completeSlateTracing(evt) {
+            if (isMilestonePaused) return;
+            if (!hasDrawnOnCurrentSlate) {
+                speakSmart('पहले अपनी उंगली से अक्षर लिखो!');
+                return;
+            }
+            playPopSound();
+            const hitMilestone = addGlobalStars(1, evt, () => {
+                nextTraceChar();
+            });
+            if (!hitMilestone) {
+                const displayName = studentName ? studentName : '';
+                speakSmart(`वाह ${displayName}! बहुत सुंदर लिखा!`);
+                setTimeout(() => {
+                    if (!isMilestonePaused) nextTraceChar();
+                }, 950);
+            }
+        }
+
+        function setSlateCategory(cat) {
+            if (isMilestonePaused) return;
+            slateCategory = cat;
+            traceIndex = 0;
+            ['swar', 'vyanjan', 'english', 'numbers'].forEach(c => {
+                const btn = document.getElementById(`slate-cat-${c}`);
+                if (!btn) return;
+                if (c === cat) {
+                    btn.className = 'py-1 rounded-xl text-[11px] font-extrabold bg-purple-600 text-white shadow active:scale-95 transition-all cursor-pointer';
+                } else {
+                    btn.className = 'py-1 rounded-xl text-[11px] font-extrabold bg-purple-50 text-purple-800 active:scale-95 transition-all cursor-pointer';
+                }
+            });
+            updateTraceDisplay();
+        }
+
+        function updateTraceDisplay() {
+            const list = learningData[slateCategory];
+            const item = list[traceIndex];
+            document.getElementById('current-trace-badge').textContent = item.letter;
+            const guideEl = document.getElementById('trace-guide-text');
+            guideEl.textContent = item.letter;
+            guideEl.style.fontSize = item.letter.length > 1 ? 'clamp(130px, 40vw, 200px)' : 'clamp(160px, 48vw, 260px)';
+            clearSlate(true);
+            if (!isMilestonePaused) {
+                speakSmart(item.speak);
+            }
+        }
+
+        function prevTraceChar() {
+            if (isMilestonePaused) return;
+            const list = learningData[slateCategory];
+            traceIndex = (traceIndex - 1 + list.length) % list.length;
+            updateTraceDisplay();
+        }
+
+        function nextTraceChar() {
+            if (isMilestonePaused) return;
+            const list = learningData[slateCategory];
+            traceIndex = (traceIndex + 1) % list.length;
+            updateTraceDisplay();
+        }
+
+        function speakCurrentTrace() {
+            if (isMilestonePaused) return;
+            const list = learningData[slateCategory];
+            const item = list[traceIndex];
+            speakSmart(item.speak);
+        }
+
+        /**
+         * =========================================================================
+         * 7. SECTION 4: "बूझो पहेली" WITH REAL PHOTOS & OBJECT COUNTING
+         * =========================================================================
+         */
+        function setQuizCategory(cat) {
+            if (isMilestonePaused) return;
+            quizCategory = cat;
+            ['swar', 'vyanjan', 'english', 'numbers'].forEach(c => {
+                const btn = document.getElementById(`qcat-${c}`);
+                if (!btn) return;
+                if (c === cat) {
+                    btn.className = 'py-1 rounded-xl text-[11px] font-extrabold bg-pink-500 text-white shadow active:scale-95 transition-all cursor-pointer';
+                } else {
+                    btn.className = 'py-1 rounded-xl text-[11px] font-extrabold bg-white text-gray-700 active:scale-95 transition-all cursor-pointer';
+                }
+            });
+            generateQuizRound();
+        }
+
+        function buildQuizCountingObjectsHTML(emoji, count) {
+            let sizeClass = 'text-5xl';
+            if (count === 2) sizeClass = 'text-4xl';
+            else if (count >= 3 && count <= 4) sizeClass = 'text-3xl';
+            else if (count >= 5 && count <= 6) sizeClass = 'text-2xl';
+            else if (count >= 7 && count <= 8) sizeClass = 'text-xl';
+            else if (count >= 9) sizeClass = 'text-lg';
+
+            let html = '';
+            for (let i = 0; i < count; i++) {
+                html += `<span class="${sizeClass} leading-none inline-block drop-shadow-sm select-none">${emoji}</span>`;
+            }
+            return `<div class="flex flex-wrap items-center justify-center gap-1.5 p-1 max-w-full">${html}</div>`;
+        }
+
+        function generateQuizRound() {
+            if (isMilestonePaused) return;
+            const pool = learningData[quizCategory];
+            const target = pool[Math.floor(Math.random() * pool.length)];
+            currentQuizTarget = target;
+
+            const grid = document.getElementById('quiz-options-grid');
+            grid.innerHTML = '';
+
+            if (quizCategory === 'numbers') {
+                const targetCount = target.count;
+                const objEmoji = target.emoji;
+                const objName = target.itemName || 'वस्तुएँ';
+
+                document.getElementById('quiz-instruction-sub').textContent =
+                    '👆 ध्यान से गिनो और सही संख्या वाला डिब्बा छुओ:';
+                document.getElementById('quiz-question-text').textContent =
+                    `बताओ, "${targetCount} ${objName}" कहाँ हैं?`;
+
+                const allPossibleCounts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(n => n !== targetCount);
+                allPossibleCounts.sort(() => Math.random() - 0.5);
+                const optionCounts = [targetCount, ...allPossibleCounts.slice(0, 3)];
+                optionCounts.sort(() => Math.random() - 0.5);
+
+                optionCounts.forEach(cnt => {
+                    const card = document.createElement('button');
+                    card.type = 'button';
+                    card.className = 'bg-white rounded-3xl border-4 border-purple-200 border-b-8 shadow-lg p-2.5 flex flex-col items-center justify-center active:scale-95 transition-all min-h-[110px] cursor-pointer';
+                    card.innerHTML = buildQuizCountingObjectsHTML(objEmoji, cnt);
+                    card.onclick = (e) => handleNumberCountingQuizAnswer(cnt, targetCount, card, e);
+                    grid.appendChild(card);
+                });
+
+                announceQuizQuestion();
+                return;
+            }
+
+            document.getElementById('quiz-instruction-sub').textContent =
+                '👂 ध्यान से सुनो और सही असली चित्र छुओ:';
+            document.getElementById('quiz-question-text').textContent =
+                `बताओ, "${target.letter} - ${target.word}" कहाँ है?`;
+
+            const distractors = pool.filter(i => i.letter !== target.letter);
+            distractors.sort(() => Math.random() - 0.5);
+            const choices = [target, ...distractors.slice(0, 3)];
+            choices.sort(() => Math.random() - 0.5);
+
+            choices.forEach(choice => {
+                const card = document.createElement('button');
+                card.type = 'button';
+                card.className = 'bg-white rounded-3xl border-4 border-purple-200 border-b-8 shadow-lg p-2.5 flex flex-col items-center justify-center gap-1.5 active:scale-95 transition-all cursor-pointer';
+                card.innerHTML = `
+                    <div class="quiz-photo-frame relative">
+                        <img src="${choice.img}" alt="${choice.word}" referrerpolicy="no-referrer"
+                             class="w-full h-full object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
+                        <span class="hidden text-5xl drop-shadow">${choice.emoji}</span>
+                    </div>
+                    <span class="text-sm sm:text-base font-black text-purple-900 leading-tight">${choice.letter} - ${choice.word}</span>
+                `;
+                card.onclick = (e) => handleQuizAnswer(choice, card, e);
+                grid.appendChild(card);
+            });
+
+            announceQuizQuestion();
+        }
+
+        function announceQuizQuestion() {
+            if (!currentQuizTarget || isMilestonePaused) return;
+            if (quizCategory === 'numbers') {
+                speakSmart(`गिनकर बताओ, ${currentQuizTarget.speak} कहाँ हैं?`);
+            } else {
+                speakSmart(`बताओ, ${currentQuizTarget.speak} कहाँ है?`);
+            }
+        }
+
+        function handleNumberCountingQuizAnswer(chosenCount, correctCount, cardEl, evt) {
+            if (isMilestonePaused) return;
+            if (chosenCount === correctCount) {
+                playPopSound();
+                cardEl.className = 'bg-emerald-100 rounded-3xl border-4 border-emerald-500 border-b-8 shadow-lg p-2.5 flex flex-col items-center justify-center scale-105 transition-all min-h-[110px]';
+
+                const hitMilestone = addGlobalStars(1, evt, () => {
+                    generateQuizRound();
+                });
+
+                if (!hitMilestone) {
+                    const displayName = studentName ? studentName : '';
+                    speakSmart(`शाबाश ${displayName}! बिल्कुल सही गिना, ${currentQuizTarget.speak}!`);
+                    setTimeout(() => {
+                        if (!isMilestonePaused) generateQuizRound();
+                    }, 1250);
+                }
+            } else {
+                cardEl.classList.remove('wrong-shake');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('wrong-shake');
+                speakSmart(`ध्यान से गिनो और ${currentQuizTarget.speak} ढूँढो`);
+            }
+        }
+
+        function handleQuizAnswer(chosen, cardEl, evt) {
+            if (isMilestonePaused) return;
+            if (chosen.letter === currentQuizTarget.letter) {
+                playPopSound();
+                cardEl.className = 'bg-emerald-100 rounded-3xl border-4 border-emerald-500 border-b-8 shadow-lg p-2.5 flex flex-col items-center justify-center gap-1.5 scale-105 transition-all';
+
+                const hitMilestone = addGlobalStars(1, evt, () => {
+                    generateQuizRound();
+                });
+
+                if (!hitMilestone) {
+                    const displayName = studentName ? studentName : '';
+                    speakSmart(`बिल्कुल सही ${displayName}!`);
+                    setTimeout(() => {
+                        if (!isMilestonePaused) generateQuizRound();
+                    }, 1150);
+                }
+            } else {
+                cardEl.classList.remove('wrong-shake');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('wrong-shake');
+                speakSmart('ओहो! फिर से कोशिश करो');
+            }
+        }
+
+        /**
+         * =========================================================================
+         * 8. SCREEN NAVIGATION CONTROLLER
+         * =========================================================================
+         */
+        function changeScreen(screenName) {
+            if (isMilestonePaused) return;
+            ['cards', 'game', 'slate', 'quiz'].forEach(s => {
+                const scr = document.getElementById(`screen-${s}`);
+                const nav = document.getElementById(`nav-${s}`);
+                if (!scr || !nav) return;
+                if (s === screenName) {
+                    scr.classList.remove('hidden');
+                    nav.className = 'flex-1 py-1 flex flex-col items-center text-pink-600 font-extrabold text-[10px] active:scale-95 transition-all cursor-pointer';
+                } else {
+                    scr.classList.add('hidden');
+                    nav.className = 'flex-1 py-1 flex flex-col items-center text-gray-500 font-bold text-[10px] active:scale-95 transition-all cursor-pointer';
+                }
+            });
+
+            if (screenName === 'game') {
+                startBalloonGame();
+            } else {
+                stopBalloonGame();
+            }
+
+            if (screenName === 'slate') {
+                setTimeout(() => {
+                    initSlateSize();
+                    updateTraceDisplay();
+                }, 60);
+            }
+
+            if (screenName === 'quiz') {
+                generateQuizRound();
+            }
+
+            if (screenName === 'cards') {
+                speakCurrentCardItem();
+            }
+        }
+
+        window.onload = () => {
+            try {
+                const savedName = localStorage.getItem('Gyanu_student_name');
+                if (savedName) {
+                    studentName = savedName;
+                    const inputEl = document.getElementById('student-name-input');
+                    if (inputEl) inputEl.value = savedName;
+                }
+                const savedStars = parseInt(localStorage.getItem('Gyanu_total_stars') || '0', 10);
+                if (!isNaN(savedStars) && savedStars > 0) {
+                    totalStars = savedStars;
+                }
+            } catch (e) {}
+            updateStudentBadgeUI();
+            renderSingle3DStage();
+        };
+
+        window.onresize = () => {
+            if (!document.getElementById('screen-slate').classList.contains('hidden')) {
+                initSlateSize();
+            }
+        };
+    </script>
+</body>
+</html>
